@@ -1,10 +1,16 @@
 @font-face {
   font-family: museo;
-  src: url('../font/Museo500-Regular-webfont.woff') format('woff');
+  src: url("../font/Museo500-Regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
+@font-face {
+  font-family: notosan;
+  src: url("../font/NotoSansHK-Black.otf") format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
 .d-flex {
   display: flex;
 }
@@ -16,7 +22,6 @@
 .align-items-center {
   align-items: center;
 }
-
 
 .position-absolute {
   position: absolute;
@@ -63,35 +68,43 @@ h4 {
   width: 450px;
 
   top: 50%;
-  left: 20%;
+  right: 20%;
   transform: translateY(-50%);
 }
 
 .heading-top {
   width: 100%;
 
-  color: #f2e500;
+  color: #f55d2c;
   font-weight: bold;
   font-size: 52px;
 }
 
 .sub-title {
   font-size: 13px;
-  color: #fff;
+  color: #000;
 
   font-family: museo;
 }
 .special-banner {
-  object-fit: none;
+  /* object-fit: none; */
 }
-
-
-
+.over-lay {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+}
 /* --- Index Page --- */
 
 .wrapper {
   padding-top: 100px;
-padding-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 .main-banner-slider {
@@ -106,7 +119,7 @@ padding-bottom: 50px;
   background: #fff;
   padding: 5px;
   border-radius: 5px;
-position: relative;
+  position: relative;
 }
 
 .offer-item-img {
@@ -134,7 +147,7 @@ position: relative;
   position: absolute;
   top: 20px;
   left: 5px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   padding: 15px 15px 11px;
   width: 220px;
   border-top-right-radius: 50px;
@@ -179,4 +192,48 @@ position: relative;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
+}
+
+/* sale */
+
+.wrapper-sale {
+  width: 100%;
+  overflow: hidden;
+}
+.wrapper > img {
+  object-fit: contain;
+}
+.content-1 > h3 {
+  font-weight: bold;
+  font-family: notosan !important;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin: 0 auto;
+  background: wheat;
+}
+.avatar > img {
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.input-contact {
+  border-radius: 5px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+
+.wrapper-logo {
+  width: 200px;
+}
+
+.ft-special {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
