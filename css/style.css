@@ -1,55 +1,4 @@
 @charset "utf-8";
-
-/* ------------------------------------------------------------------
- * Name         : Gambo - Online Grocery Supermarket HTML Template
- * File         : style.css
- * Author       : Gambolthemes
- * Author URI   : gambol943@gmail.com
- * All Rights Reserved.
- * --------------------------------------------------------------------- */
-
-/*===================== TABLE OF CONTENT =======================
-
-1. Google Fonts
-2. Typography Css
-3. CROSS BROWSER COMPATABILITY
-4. Body Scrollbar
-5. Night Mode Btn
-6. Search cate scroll
-7. Header
-8. Category Model
-9. Category Model
-10. Cart Offset Overlay
-11. Cart Radio Btn
-12. Quantity box
-13. Filters Overlay
-14. Category Radio Btn
-15. Index Page
-16. Slider Category
-17. Footer
-18. Product Grid Page
-19. Single Product View
-20. Single Product Radio Btn
-21. Checkout Page
-22. User Dashboard Page
-23. Dashboard My Orders
-24. My Rewards
-25. My Wallet
-26. My Addresses
-27. Career Page
-28. About Us
-29. Our Blog
-30. Blog Detail View
-31. Press Page
-32. Sign In
-33. Contact Us
-34. Product Request
-35. Faq Page
-36. Offers Page
-37. Bill Page
-
-=============================================================*/
-
 /* ================================================================================== 
  Google Fonts
 ===================================================================================== */
@@ -178,7 +127,7 @@ h3 {
 }
 h4 {
 	font-size: 1.125em;
-	font-family: 'Roboto', sans-serif !important;
+	font-family: 'Roboto', sans-serif ;
 	/* 1.125x body copy size = 18px */
 	line-height: 1.11111111;
 }
@@ -1703,99 +1652,6 @@ i.icon1 {
     padding-left: 3px;
 }
 
-/* --- Index Page --- */
-
-.wrapper {
-    padding-top: 128px;
-	padding-bottom: 50px;
-}
-
-.main-banner-slider {
-    margin-top: 30px;
-}
-
-.offers-banner .owl-stage-outer {
-    overflow: visible !important;
-}
-
-.offer-item {
-    background: #fff;
-    padding: 5px;
-    border-radius: 5px;
-	position: relative;
-}
-
-.offer-item-img {
-    position: relative;
-    width: 100%;
-}
-
-.offer-item-img img {
-    border-radius: 5px;
-    width: 100%;
-}
-
-.gambo-overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #2b2f4c;
-    border-radius: 5px;
-    opacity: 0.05;
-}
-
-.offer-top-text-banner {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    background: rgba(255,255,255,0.9);
-    padding: 15px 15px 11px;
-    width: 220px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-}
-
-.offer-top-text-banner p {
-    font-size: 12px;
-    font-weight: 600;
-    color: #f55d2c;
-    margin-bottom: 3px;
-    text-align: left;
-    text-transform: uppercase;
-}
-
-.top-text-1 {
-    font-size: 16px;
-    font-weight: 500;
-    color: #2b2f4c;
-    margin-bottom: 5px;
-    line-height: 24px;
-    text-align: left;
-}
-
-.offer-top-text-banner span {
-    font-weight: 500;
-    font-size: 14px;
-    color: #8f91ac;
-    text-align: left;
-    line-height: 24px;
-}
-
-.Offer-shop-btn {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: inline-block;
-    padding: 10px 30px;
-    background: #f55d2c;
-    text-align: center;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 500;
-}
 
 /* --- Slider Category --- */
 
