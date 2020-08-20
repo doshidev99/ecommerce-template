@@ -2,14 +2,14 @@
 <html lang="en">
 
 	
-<!-- Mirrored from gambolthemes.net/html-items/gambo_supermarket_demo/request_product.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jun 2020 14:13:14 GMT -->
+<!-- Mirrored from gambolthemes.net/html-items/gambo_supermarket_demo/contact_us.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jun 2020 14:13:18 GMT -->
 <head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
 		<meta name="description" content="Gambolthemes">
 		<meta name="author" content="Gambolthemes">		
-		<title>Gambo - Request Product</title>
+		<title>Gambo - Contact Us</title>
 		
 		<!-- Favicon Icon -->
 		<link rel="icon" type="image/png" href="images/fav.png">
@@ -21,7 +21,6 @@
 		<link href="css/responsive.css" rel="stylesheet">
 		<link href="css/night-mode.css" rel="stylesheet">
 		<link href="css/step-wizard.css" rel="stylesheet">
-		<link href="css/bootstrap-tagsinput.css" rel="stylesheet">
 		
 		<!-- Vendor Stylesheets -->
 		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -309,7 +308,7 @@
 			</div>
 			<div class="checkout-cart">
 				<a href="#" class="promo-code">Have a promocode?</a>
-				<a href="#" class="cart-checkout-btn hover-btn">Proceed to Checkout</a>
+				<a href="bills.php" class="cart-checkout-btn hover-btn">Proceed to Checkout</a>
 			</div>
 		</div>
 	</div>
@@ -480,77 +479,56 @@
 	<!-- Header End -->
 	<!-- Body Start -->
 	<div class="wrapper">
-		<div class="gambo-Breadcrumb">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Request Product</li>
-							</ol>
-						</nav>
-					</div>
-				</div>
-			</div>
+		
+	<?php 
+
+	
+	?>
+		
+	<div class="container">
+		<div class="px-5 py-5">
+
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Image</th>
+						<th scope="col">Name</th>
+						<th scope="col">Total</th>
+						<th scope="col">Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
 		</div>
-		<div class="request-grid">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-12">
-						<div class="default-title">
-							<h2>Request Product?</h2>
-							<img src="images/line.svg" alt="">
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="request-products">
-							<div class="form-group">
-								<input type="text" value="" data-role="tagsinput" placeholder="Type Product">
-							</div>
-							<button class="next-btn16 hover-btn mt-3 rqst-btn" type="submit">Request Product</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="life-gambo pb-3">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="default-title">
-							<h2>How Do I Request Product?</h2>
-							<p>How Do I order for Request on Gambo</p>
-							<img src="images/line.svg" alt="">
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="how-order-steps">
-							<div class="how-order-icon">
-								<i class="uil uil-text"></i>
-							</div>
-							<h4>Type Product</h4>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="how-order-steps">
-							<div class="how-order-icon">
-								<i class="uil uil-location-arrow-alt"></i>
-							</div>
-							<h4>Select Product</h4>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="how-order-steps">
-							<div class="how-order-icon">
-								<i class="uil uil-box"></i>
-							</div>
-							<h4>Request Order Product</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
+	</div>
+
+
 	</div>
 	<!-- Body End -->
 	<!-- Footer Start -->
@@ -699,7 +677,6 @@
 	<script src="vendor/OwlCarousel/owl.carousel.js"></script>
 	<script src="vendor/semantic/semantic.min.js"></script>
 	<script src="js/custom.js"></script>
-	<script src="js/bootstrap-tagsinput.min.js"></script>
 	<script src="js/product.thumbnail.slider.js"></script>
 	<script src="js/offset_overlay.js"></script>
 	<script src="js/night-mode.js"></script>
@@ -707,5 +684,5 @@
 	
 </body>
 
-<!-- Mirrored from gambolthemes.net/html-items/gambo_supermarket_demo/request_product.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jun 2020 14:13:18 GMT -->
+<!-- Mirrored from gambolthemes.net/html-items/gambo_supermarket_demo/contact_us.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jun 2020 14:13:18 GMT -->
 </html>
