@@ -1,13 +1,6 @@
-﻿<?php require 'connect.php'; ?>
-<?php
-
-$sql = "select * from products ";
-$result = $conn->query($sql);
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
 	<meta charset="utf-8">
@@ -34,116 +27,23 @@ $result = $conn->query($sql);
 
 </head>
 
-<body>
-	<!-- Category Model Start-->
-	<div id="category_model" class="header-cate-model main-gambo-model modal fade" tabindex="-1" role="dialog" aria-modal="false">
-		<div class="modal-dialog category-area" role="document">
-			<div class="category-area-inner">
-				<div class="modal-header">
-					<button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
-						<i class="uil uil-multiply"></i>
-					</button>
-				</div>
-				<div class="category-model-content modal-content">
-					<div class="cate-header">
-						<h4>Select Category</h4>
-					</div>
-					<ul class="category-by-cat">
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-1.svg" alt="">
-								</div>
-								<div class="text"> Fruits and Vegetables </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-2.svg" alt="">
-								</div>
-								<div class="text"> Grocery & Staples </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-3.svg" alt="">
-								</div>
-								<div class="text"> Dairy & Eggs </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-4.svg" alt="">
-								</div>
-								<div class="text"> Beverages </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-5.svg" alt="">
-								</div>
-								<div class="text"> Snacks </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-6.svg" alt="">
-								</div>
-								<div class="text"> Home Care </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-7.svg" alt="">
-								</div>
-								<div class="text"> Noodles & Sauces </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-8.svg" alt="">
-								</div>
-								<div class="text"> Personal Care </div>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="single-cat-item">
-								<div class="icon">
-									<img src="images/category/icon-9.svg" alt="">
-								</div>
-								<div class="text"> Pet Care </div>
-							</a>
-						</li>
-					</ul>
-					<a href="#" class="morecate-btn"><i class="uil uil-apps"></i>More
-						Categories</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Category Model End-->
-	<!-- Search Model Start-->
-	<div id="search_model" class="header-cate-model main-gambo-model modal fade" tabindex="-1" role="dialog" aria-modal="false">
-		<div class="modal-dialog search-ground-area" role="document">
-			<div class="category-area-inner">
-				<div class="modal-header">
-					<button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
-						<i class="uil uil-multiply"></i>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
+<body class="goto-here">
+	<?php require 'connect.php'; ?>
 
-	</div>
-	<!-- Header Start -->
+	<?php
+
+	$flag = $_SESSION['username'];
+
+	if (!$flag) {
+		header("Location: login.php");
+	}
+
+	?>
+	<?php
+	$product  = !empty($_SESSION['cart']) ? $_SESSION['cart'] : [];
+	?>
+
+
 	<header class="header clearfix">
 		<div class="top-header-group">
 			<div class="top-header">
@@ -211,7 +111,6 @@ $result = $conn->query($sql);
 							<a href="#" class="opts_account">
 								<img src="images/avatar/img-5.jpg" alt="">
 								<span class="user__name">
-
 									<?php
 
 									echo $_SESSION['name-user'];
@@ -235,6 +134,9 @@ $result = $conn->query($sql);
 				</div>
 			</div>
 		</div>
+
+
+		<!-- // log out -->
 		<div class="sub-header-group">
 			<div class="sub-header">
 				<div class="ui dropdown">
@@ -302,204 +204,73 @@ $result = $conn->query($sql);
 			</div>
 		</div>
 	</header>
-	<!-- Header End -->
-	<!-- Body Start -->
 	<div class="wrapper">
-		<!-- Offers Start -->
-		<div class="main-banner-slider">
+
+		<section class="ftco-section pt-5 mt-3">
+
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
-						<div class="owl-carousel offers-banner owl-theme">
-							<div class="item">
-								<div class="offer-item">
-									<div class="offer-item-img">
-										<div class="gambo-overlay"></div>
-										<img src="images/banners/offer-1.jpg" alt="">
-									</div>
-									<div class="offer-text-dt">
-										<div class="offer-top-text-banner">
-											<p>6% Off</p>
-											<div class="top-text-1">Buy More & Save More</div>
-											<span>Fresh Vegetables</span>
-										</div>
-										<a href="#" class="Offer-shop-btn hover-btn">Shop Now</a>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="offer-item">
-									<div class="offer-item-img">
-										<div class="gambo-overlay"></div>
-										<img src="images/banners/offer-2.jpg" alt="">
-									</div>
-									<div class="offer-text-dt">
-										<div class="offer-top-text-banner">
-											<p>5% Off</p>
-											<div class="top-text-1">Buy More & Save More</div>
-											<span>Fresh Fruits</span>
-										</div>
-										<a href="#" class="Offer-shop-btn hover-btn">Shop Now</a>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="offer-item">
-									<div class="offer-item-img">
-										<div class="gambo-overlay"></div>
-										<img src="images/banners/offer-3.jpg" alt="">
-									</div>
-									<div class="offer-text-dt">
-										<div class="offer-top-text-banner">
-											<p>3% Off</p>
-											<div class="top-text-1">Hot Deals on New Items</div>
-											<span>Daily Essentials Eggs & Dairy</span>
-										</div>
-										<a href="#" class="Offer-shop-btn hover-btn">Shop Now</a>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="offer-item">
-									<div class="offer-item-img">
-										<div class="gambo-overlay"></div>
-										<img src="images/banners/offer-4.jpg" alt="">
-									</div>
-									<div class="offer-text-dt">
-										<div class="offer-top-text-banner">
-											<p>2% Off</p>
-											<div class="top-text-1">Buy More & Save More</div>
-											<span>Beverages</span>
-										</div>
-										<a href="#" class="Offer-shop-btn hover-btn">Shop Now</a>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="offer-item">
-									<div class="offer-item-img">
-										<div class="gambo-overlay"></div>
-										<img src="images/banners/offer-5.jpg" alt="">
-									</div>
-									<div class="offer-text-dt">
-										<div class="offer-top-text-banner">
-											<p>3% Off</p>
-											<div class="top-text-1">Buy More & Save More</div>
-											<span>Nuts & Snacks</span>
-										</div>
-										<a href="#" class="Offer-shop-btn hover-btn">Shop Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Offers End -->
-		<!-- Categories Start -->
 
-		<!-- Categories End -->
-		<!-- Featured Products Start -->
-		<div class="section145">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="main-title-tt">
-							<div class="main-title-left">
-								<span>For You</span>
-								<h2>Top Featured Products</h2>
-							</div>
-							<a href="#" class="see-more-btn">See All</a>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="owl-carousel featured-slider owl-theme">
-							<?php
-							$dem = 0;
-							while ($rs = $result->fetch()) {
-								$dem++;
-							?>
-								<div class="item">
-									<div class="product-item">
-										<a href="single_product_view.html" class="product-img">
-											<img src="images/products/<?php echo $rs['images'] ?>" class="card-img-top" alt="...">
-											<div class="product-absolute-options">
-												<span class="offer-badge-1">6% off</span>
-												<span class="like-icon" title="wishlist"></span>
-											</div>
-										</a>
-										<div class="product-text-dt">
-											<p><?php echo $rs['status'] ?></p>
-											<h4><?php echo $rs['name'] ?></h4>
-											<div class="product-price">
-												<?php echo $rs['price'] ?> đ
-											</div>
-											<div class="qty-cart">
-												<!-- <div class="quantity buttons_added">
-													<input type="button" value="-" class="minus minus-btn">
-													<input type="number" step="1" name="quantity" value="1" class="input-text qty text">
-													<input type="button" value="+" class="plus plus-btn">
-												</div> -->
-												<span class="cart-icon">
-													<a href="cart.php?id= <?php echo $rs['id'] ?>">
-														<i class="uil uil-shopping-cart-alt"></i>
-													</a>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
+					<div class="col-8 mx-auto">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Tên</th>
+									<th> Giá </th>
+									<th> Số lượng</th>
+									<th> Tình Trạng</th>
+									<th> Thành tiền</th>
+									<th> Hình ảnh</th>
+									<th> Hành động</th>
+								</tr>
+							</thead>
+							<tbody>
+								<form action="" method="POST">
+									<?php
+									$n = 1;
+									$tongtien = 0;
+									$tongsoluong = 0;
+									foreach ($product as $item) :
+										$thanhtien = $item['price'] * $item['quantity'];
+										$tongtien += $thanhtien;
+										$tongsoluong += $item['quantity'];
+									?>
+										<tr>
+											<td><?php echo $item['name']; ?></td>
+											<td><?php echo number_format($item['price']); ?></td>
+											<td><?php echo $item['quantity']; ?></td>
+											<td><?php echo $item['status']; ?></td>
+											<td><?php echo number_format($thanhtien); ?></td>
+											<td> <img style="width: 50px; height: 50px;" src="images/<?php echo $item['images'] ?> " alt="" /></td>
+											<td><a href="cart.php?id=<?php echo $item['id']; ?>&action=delete" class="btn btn-danger">Xóa</a></td>
+										</tr>
 
-							<?php } ?>
+									<?php $n++;
+									endforeach; ?>
+									<td colspan="6"><strong>Thành tiền</strong></td>
+									<td colspan="3"><strong><?php echo number_format($tongtien); ?></strong></td>
 
+							</tbody>
+						</table>
+						<div style="margin-top: 40px;" class="d-flex justify-content-end">
+							<button class="btn btn-success">
+								<a href="confirm.php" class="text-white"> Tiến hành thanh toán</a>
+							</button>
 						</div>
+						</form>
 					</div>
+
+
+
 				</div>
+
 			</div>
-		</div>
-		<!-- Featured Products End -->
-		<!-- Best Values Offers Start -->
-		<div class="section145">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="main-title-tt">
-							<div class="main-title-left">
-								<span>Offers</span>
-								<h2>Best Values</h2>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#" class="best-offer-item">
-							<img src="images/best-offers/offer-1.jpg" alt="">
-						</a>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#" class="best-offer-item">
-							<img src="images/best-offers/offer-2.jpg" alt="">
-						</a>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#" class="best-offer-item offr-none">
-							<img src="images/best-offers/offer-3.jpg" alt="">
-							<div class="cmtk_dt">
-								<div class="product_countdown-timer offer-counter-text" data-countdown="2021/01/06"></div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-12">
-						<a href="#" class="code-offer-item">
-							<img src="images/best-offers/offer-4.jpg" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+
+		</section>
 
 	</div>
-	<!-- Footer Start -->
+
+	<!-- /// thanh toans -->
 	<footer class="footer">
 		<div class="footer-first-row">
 			<div class="container">
@@ -547,7 +318,7 @@ $result = $conn->query($sql);
 			</div>
 		</div>
 	</footer>
-	<!-- Footer End -->
+	<!-- .section -->
 
 	<!-- Javascripts -->
 	<script src="js/jquery-3.3.1.min.js"></script>
@@ -558,8 +329,6 @@ $result = $conn->query($sql);
 	<script src="js/custom.js"></script>
 	<script src="js/night-mode.js"></script>
 
-
 </body>
-
 
 </html>

@@ -1,50 +1,35 @@
+<?php require '../connect.php'; ?>
 <?php
-require_once('./connect.php');
 
-if (isset($_POST['add'])) {
+if (isset($_GET['id'])) {
+	$id = $_GET['id'];
 
-	$name =  $_POST['name'];
-	$price =  $_POST['price'];
-	$images = $_FILES['file']['name'];
-	$linkup = 'Images/';
-	move_uploaded_file($_FILES['file']['tmp_name'], $linkup . $images);
-	$details =  $_POST['details'];
-	$status =  $_POST['status'];
-
-	$insert = "INSERT INTO products(name, price, details, status, images)
-	VALUES ('$name', '$price', '$details', '$status', '$images')";
-	$conn->exec($insert);
-	header("Location: products.php");
+	$sql = "SELECT * FROM billDetails WHERE id_bills = $id";
+	$result = $conn->query($sql);
+	header('location: index.php');
 }
 
 ?>
+<?php require 'logout.php'; ?>
+
 
 <!doctype html>
 <html lang="en">
 
 <head>
-	<title>Thêm sản phẩm</title>
+	<title>Chi tiết hóa đơn</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-	<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
-	<link href='vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
-	<link href="css/night-mode.css" rel="stylesheet">
-	<link href="css/step-wizard.css" rel="stylesheet">
-
-	<!-- Vendor Stylesheets -->
-	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-	<link href="vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-	<link href="vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="vendor/semantic/semantic.min.css">
-
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="Css/style.css"> -->
 	<style>
 		@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+		th,
+		td {
+			vertical-align: middle !important;
+			text-align: center;
+		}
 
 		.navbar-icon-top .navbar-nav .nav-link>.fa {
 			position: relative;
@@ -174,6 +159,7 @@ if (isset($_POST['add'])) {
 		}
 	</style>
 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
@@ -182,11 +168,12 @@ if (isset($_POST['add'])) {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="products.php">
+					<a class="nav-link" href="index.php">
 						<i class="fa fa-home"></i>Trang chủ
 						<span class="sr-only">(current)</span>
 					</a>
 				</li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="add-product.php">
 						<i class="fa fa-hand-o-up"></i>
@@ -194,7 +181,15 @@ if (isset($_POST['add'])) {
 					</a>
 				</li>
 
+				<li class="nav-item">
+					<a class="nav-link" href="cart.php">
+						<i class="fa fa-truck"></i>
+						</i> Quản lý đơn hàng
+					</a>
+				</li>
+
 			</ul>
+
 
 			<ul class="navbar-nav ">
 
@@ -203,43 +198,97 @@ if (isset($_POST['add'])) {
 				</li>
 			</ul>
 
+			<ul class="navbar-nav px-2">
+
+				<li class="nav-item text-white">
+
+
+
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+						Logout
+					</button>
+
+
+				</li>
+			</ul>
+
 		</div>
 	</nav>
-	<div class="container">
-		<h1 class="py-5 text-center">THÊM SẢN PHẨM</h1>
-		<div class="row justify-content-center">
-			<div class="col-6">
-				<div class="">
-					<form action="" method="post" enctype="multipart/form-data">
 
-						<div class="form-group">
-							<label for="">Tên Sản phẩm</label>
-							<input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Giá của sản phẩm</label>
-							<input type="text" name="price" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Hình Ảnh</label>
-							<input type="file" name="file" id="" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Chi tiết</label>
-							<input type="text" name="details" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Tình Trạng</label>
-							<input type="text" name="status" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Bạn có chắc muốn thoát
 
-						<button class="btn btn-warning btn-block" name="add">Thêm</button>
+				</div>
+				<div class="modal-footer">
+
+					<form>
+						<button type="submit" class="btn btn-danger" name="logout">
+							Đồng Ý
+						</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<section class="claerfix-contenr">
+		<div class="container ">
+			<h2 class="row justify-content-center m-4 ">
+				Danh sách đơn hàng
+			</h2>
+
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">STT</th>
+						<th scope="col">Tên sản phẩm</th>
+						<th scope="col">Giá Sản phẩm</th>
+						<th scope="col">Xem thêm</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					$dem = 0;
+					while ($rs = $result->fetch()) {
+						$dem++;
+					?>
+						<tr>
+							<th scope="row"><?php echo $dem; ?></th>
+							<td><?php echo $rs['name_product'] ?></td>
+							<td><?php echo $rs['price'] ?></td>
+							<td><?php echo $rs['idBills'] ?></td>
+							<td>
+								<a href="detail.php?id=<?php echo $rs['idBills'] ?>" class="btn btn-warning"> Xem chi tiết
+								</a>
+							</td>
+						</tr>
+					<?php } ?>
+
+				</tbody>
+			</table>
+
+			<!-- php -->
+
+		</div>
+	</section>
+
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

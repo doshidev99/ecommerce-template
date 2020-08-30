@@ -1,78 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- Mirrored from gambolthemes.net/html-items/gambo_supermarket_demo/sign_in.php by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jun 2020 14:12:38 GMT -->
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, shrink-to-fit=9">
 	<meta name="description" content="Gambolthemes">
 	<meta name="author" content="Gambolthemes">
-	<title>Gambo - Sign In</title>
+	<title>Admin Login</title>
 
 	<!-- Favicon Icon -->
 	<link rel="icon" type="image/png" href="images/fav.png">
 
 	<!-- Stylesheets -->
 	<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
-	<link href='vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
-	<link href="css/night-mode.css" rel="stylesheet">
-	<link href="css/step-wizard.css" rel="stylesheet">
+	<link href='../vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+	<link href="../css/style.css" rel="stylesheet">
+	<link href="../css/responsive.css" rel="stylesheet">
+	<link href="../css/night-mode.css" rel="stylesheet">
+	<link href="../css/step-wizard.css" rel="stylesheet">
 
 	<!-- Vendor Stylesheets -->
-	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-	<link href="vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-	<link href="vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="vendor/semantic/semantic.min.css">
+	<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="../vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
+	<link href="../vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../vendor/semantic/semantic.min.css">
 
 </head>
-<?php require 'connect.php'; ?>
+<?php require '../connect.php'; ?>
+
+<!-- php -->
 
 <?php
-session_start();
-// $error = "abc";
+$flag = $_SESSION['ss-admin'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($flag) {
+	header("Location: index.php");
+}
 
-	if (isset($_POST["submit"])) {
-		$email = $_POST["email"];
-		$password = $_POST["password"];
-		if ($email != "" || $password != "") {
 
-			$sql = "SELECT * FROM `users` WHERE `email`=? AND `password`=? ";
-			$query = $conn->prepare($sql);
-			$query->execute(array($email, $password));
+if (isset($_POST['submit'])) {
+	$email = $_POST['email'];
+	$pass = $_POST['password'];
+	$sql = "SELECT * FROM `admin` WHERE `email`=? AND `password`=? ";
+	//PDO::prepare — Prepares a statement for execution and returns a statement object
+	$query = $conn->prepare($sql);
+	$query->execute(
+		array($email, $pass)
+	);
+	// check when Truthy and Falsy
+	$row = $query->rowCount();
 
-			$row = $query->rowCount();
-			$response = $query->fetch();
+	if ($row > 0) {
+		echo " Đăng nhập thành công!";
+		$_SESSION['ss-admin'] = $email;
 
-			if ($row > 0) {
-				$_SESSION['username'] = $email;
-				$_SESSION['name-user'] = $response['name'];
-				$_SESSION['idUser'] = $response['id'];
-				header("Location: index.php");
-			} else {
-				echo "
-				<script>alert('Email or password incorrect. Please again!')</script>
-				";
-				header("Location: login.php");
-				exit();
-			}
-
-			exit();
-		}
+		header("Location: index.php");
+	} else {
+		// todo :
+		echo " Đăng nhập thất bại vui lòng thử lại!";
+		header("Location: login.php");
 	}
 }
 
 ?>
 
+<!-- end php -->
+
 <body>
-	<div class="sign-inup">
+	<div class="sign-inup" style="background:lightblue; height: 100vh">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-5">
@@ -82,11 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<a href="index.php"><img src="images/logo.svg" alt=""></a>
 								<a href="index.php"><img class="logo-inverse" src="images/dark-logo.svg" alt=""></a>
 							</div>
-							<div class="form-dt">
+							<div class="">
 								<div class="form-inpts checout-address-step">
-									<form method="post">
+
+									<!-- form -->
+									<form method="POST" enctype="multipart/form-data">
 										<div class="form-title">
-											<h6>Đăng nhập</h6>
+											<h6>Login with admin</h6>
 										</div>
 										<div class="form-group pos_rel">
 											<input name="email" type="email" placeholder="Enter your email" class="form-control lgn_input" required="">
@@ -99,12 +98,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 										<div>
 											<?php echo $error; ?>
 										</div>
-										<button class="login-btn hover-btn" name="submit" type="submit">Đăng nhập</button>
+										<button class="login-btn hover-btn" name="submit" type="submit">Login</button>
 									</form>
+
+
 								</div>
-								<div class="signup-link">
-									<p>Bạn chưa có tài khoản - <a href="sign_up.php">Tạo tại đây</a></p>
-								</div>
+
 							</div>
 						</div>
 					</div>
@@ -127,4 +126,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 
-</html>
+</html> -->

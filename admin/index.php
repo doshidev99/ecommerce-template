@@ -1,8 +1,19 @@
-<?php require 'connect.php'; ?>
+<?php require '../connect.php'; ?>
 <?php
+
+$flag = $_SESSION['ss-admin'];
+
+if (!$flag) {
+	header("Location: login.php");
+}
+
 $sql = "select * from products ";
 $result = $conn->query($sql);
+
+
 ?>
+<?php require 'logout.php'; ?>
+
 
 <?php require 'delete.php'; ?>
 
@@ -18,6 +29,12 @@ $result = $conn->query($sql);
 	<!-- <link rel="stylesheet" href="Css/style.css"> -->
 	<style>
 		@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+		th,
+		td {
+			vertical-align: middle !important;
+
+		}
 
 		.navbar-icon-top .navbar-nav .nav-link>.fa {
 			position: relative;
@@ -156,11 +173,12 @@ $result = $conn->query($sql);
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="products.php">
+					<a class="nav-link" href="add-product.php">
 						<i class="fa fa-home"></i>Trang chủ
 						<span class="sr-only">(current)</span>
 					</a>
 				</li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="add-product.php">
 						<i class="fa fa-hand-o-up"></i>
@@ -169,28 +187,62 @@ $result = $conn->query($sql);
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="gioithieu.html">
-						<i class="fa fa-hand-o-up"></i>
-						</i> Giới thiệu
+					<a class="nav-link" href="cart.php">
+						<i class="fa fa-truck"></i>
+						</i> Quản lý đơn hàng
 					</a>
 				</li>
 
 			</ul>
+
+
 			<ul class="navbar-nav ">
 
-				<li class="nav-item">
-					<a class="nav-link" href="Shop.html">
-						<i class="fa fa-shopping-bag">
-							<span class="badge badge-success"><i class="fa fa-shopping-bag"></i></span>
-						</i> Giỏ hàng
-					</a>
+				<li class="nav-item text-white">
+					Admin
+				</li>
+			</ul>
+
+			<ul class="navbar-nav px-2">
+
+				<li class="nav-item text-white">
+
+
+
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+						Logout
+					</button>
+
+
 				</li>
 			</ul>
 
 		</div>
 	</nav>
 
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Bạn có chắc muốn thoát
 
+				</div>
+				<div class="modal-footer">
+
+					<form>
+						<button type="submit" class="btn btn-danger" name="logout">
+							Đồng Ý
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<section class="claerfix-contenr">
 		<div class="container ">
@@ -213,16 +265,12 @@ $result = $conn->query($sql);
 					$dem = 0;
 					while ($rs = $result->fetch()) {
 						$dem++;
-
 					?>
 						<tr>
 							<th scope="row"><?php echo $dem; ?></th>
-							<th>
-								<?php print_r($rs) ?>
-							</th>
 							<td>
 								<div style="width:18rem ; height:150px; object-fit: cover">
-									<img src="images/<?php echo $rs['images'] ?>" class="card-img-top" alt="..." style=" width:99%; height:100%">
+									<img src="../images/products/<?php echo $rs['images'] ?>" class="card-img-top" alt="..." style=" width:99%; height:100%">
 								</div>
 							</td>
 							<td><?php echo $rs['name'] ?></td>
@@ -230,7 +278,7 @@ $result = $conn->query($sql);
 							<td><?php echo $rs['status'] ?></td>
 							<td>
 								<a href="edit.php?id=<?php echo $rs['id'] ?>" class="btn btn-primary">Sửa</a>
-								<a href="admin.php?id=<?php echo $rs['id'] ?>" class="btn btn-danger"><i class="fa fa-street-view"></i> Xóa</a>
+								<a href="index.php?id=<?php echo $rs['id'] ?>" class="btn btn-danger"><i class="fa fa-street-view"></i> Xóa</a>
 
 							</td>
 						</tr>

@@ -1,47 +1,35 @@
 <?php require 'connect.php'; ?>
 <?php
+
 if (isset($_GET['id'])) {
 	$id = $_GET['id'];
-	$sql = "SELECT * FROM products WHERE id ='$id'";
-	$result = $connection->query($sql);
-	$rs = $result->fetch();
 
-
-
+	$sql = "SELECT * FROM billDetails WHERE id_bills = $id";
 	$result = $conn->query($sql);
-
-	// if (isset($_POST['edit'])) {
-	// 	$masp = isset($_POST['id']);
-	// 	$name = isset($_POST['name']);
-	// 	$gia = isset($_POST['price']);
-	// 	// if ($_FILES['file']['name'] != '') {
-	// 	// 	$hinhanh = $_FILES['file']['name'];
-	// 	// 	$linkup = 'img/';
-	// 	// 	move_uploaded_file($_FILES['file']['tmp_name'], $linkup . $hinhanh);
-	// 	// } else {
-	// 	// 	$hinhanh = $_POST['HA'];
-	// 	// }
-	// 	$chitiet = isset($_POST['details']);
-	// 	$update = "UPDATE products SET name = '" . $name . "', price = '" . $gia . "', details = '" . $chitiet . "' where id = '" . $masp . "'";
-	// 	$conn->exec($update);
-
-	// 	header("location:admin.php");
-	// }
+	header('location: index.php');
 }
+
 ?>
+<?php require 'logout.php'; ?>
 
 
 <!doctype html>
 <html lang="en">
 
 <head>
-	<title>Edit Products</title>
+	<title>Chi tiết hóa đơn</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- <link rel="stylesheet" href="Css/style.css"> -->
 	<style>
 		@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+		th,
+		td {
+			vertical-align: middle !important;
+			text-align: center;
+		}
 
 		.navbar-icon-top .navbar-nav .nav-link>.fa {
 			position: relative;
@@ -180,11 +168,12 @@ if (isset($_GET['id'])) {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="products.php">
+					<a class="nav-link" href="index.php">
 						<i class="fa fa-home"></i>Trang chủ
 						<span class="sr-only">(current)</span>
 					</a>
 				</li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="add-product.php">
 						<i class="fa fa-hand-o-up"></i>
@@ -193,59 +182,99 @@ if (isset($_GET['id'])) {
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="gioithieu.html">
-						<i class="fa fa-hand-o-up"></i>
-						</i> Giới thiệu
+					<a class="nav-link" href="cart.php">
+						<i class="fa fa-truck"></i>
+						</i> Quản lý đơn hàng
 					</a>
 				</li>
 
 			</ul>
+
+
 			<ul class="navbar-nav ">
 
-				<li class="nav-item">
-					<a class="nav-link" href="Shop.html">
-						<i class="fa fa-shopping-bag">
-							<span class="badge badge-success"><i class="fa fa-shopping-bag"></i></span>
-						</i> Giỏ hàng
-					</a>
+				<li class="nav-item text-white">
+					Admin
+				</li>
+			</ul>
+
+			<ul class="navbar-nav px-2">
+
+				<li class="nav-item text-white">
+
+
+
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+						Logout
+					</button>
+
+
 				</li>
 			</ul>
 
 		</div>
 	</nav>
 
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Bạn có chắc muốn thoát
 
+				</div>
+				<div class="modal-footer">
+
+					<form>
+						<button type="submit" class="btn btn-danger" name="logout">
+							Đồng Ý
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<section class="claerfix-contenr">
 		<div class="container ">
-			<h2 class="row justify-content-center m-4 ">Sản phẩm</h2>
+			<h2 class="row justify-content-center m-4 ">
+				Danh sách đơn hàng
+			</h2>
 
 
-			<form action="" method="post" enctype="multipart/form-data">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">STT</th>
+						<th scope="col">Tên sản phẩm</th>
+						<th scope="col">Giá Sản phẩm</th>
+						<th scope="col">Xem thêm</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					$dem = 0;
+					while ($rs = $result->fetch()) {
+						$dem++;
+					?>
+						<tr>
+							<th scope="row"><?php echo $dem; ?></th>
+							<td><?php echo $rs['name_product'] ?></td>
+							<td><?php echo $rs['price'] ?></td>
+							<td><?php echo $rs['idBills'] ?></td>
+							<td>
+								<a href="detail.php?id=<?php echo $rs['idBills'] ?>" class="btn btn-warning"> Xem chi tiết
+								</a>
+							</td>
+						</tr>
+					<?php } ?>
 
-				<div class="form-group">
-					<label for="">Tên</label>
-					<input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId">
-				</div>
-				<div class="form-group">
-					<label for="">Giá</label>
-					<input type="text" name="price" id="" class="form-control" placeholder="" aria-describedby="helpId">
-				</div>
-				<div class="form-group">
-					<label for="">Hình Ảnh</label>
-					<input type="file" name="file" id="" placeholder="" aria-describedby="helpId">
-				</div>
-				<div class="form-group">
-					<label for="">Chi tiết</label>
-					<input type="text" name="details" id="" class="form-control" placeholder="" aria-describedby="helpId">
-				</div>
-				<div class="form-group">
-					<label for="">Tình Trạng</label>
-					<input type="text" name="status" id="" class="form-control" placeholder="" aria-describedby="helpId">
-				</div>
-
-				<button class="btn btn-warning btn-block" name="edit">Cập nhập</button>
-			</form>
+				</tbody>
+			</table>
 
 			<!-- php -->
 

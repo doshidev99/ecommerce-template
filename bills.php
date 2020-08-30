@@ -318,11 +318,11 @@
 		<div class="top-header-group">
 			<div class="top-header">
 				<div class="res_main_logo">
-					<a href="index.html"><img src="images/dark-logo-1.svg" alt=""></a>
+					<a href="index.php"><img src="images/dark-logo-1.svg" alt=""></a>
 				</div>
 				<div class="main_logo" id="logo">
-					<a href="index.html"><img src="images/logo.svg" alt=""></a>
-					<a href="index.html"><img class="logo-inverse" src="images/dark-logo.svg" alt=""></a>
+					<a href="index.php"><img src="images/logo.svg" alt=""></a>
+					<a href="index.php"><img class="logo-inverse" src="images/dark-logo.svg" alt=""></a>
 				</div>
 				<div class="select_location">
 					<div class="ui inline dropdown loc-title">
@@ -428,7 +428,7 @@
 						<button class="navbar-toggler menu_toggle_btn" type="button" data-target="#navbarSupportedContent"><i class="uil uil-bars"></i></button>
 						<div class="collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu" id="navbarSupportedContent">
 							<ul class="navbar-nav main_nav align-self-stretch">
-								<li class="nav-item"><a href="index.html" class="nav-link active" title="Home">Home</a></li>
+								<li class="nav-item"><a href="index.php" class="nav-link active" title="Home">Home</a></li>
 								<li class="nav-item"><a href="shop_grid.html" class="nav-link new_item" title="New Products">New Products</a></li>
 								<li class="nav-item"><a href="shop_grid.html" class="nav-link" title="Featured Products">Featured Products</a></li>
 								<li class="nav-item">

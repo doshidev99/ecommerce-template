@@ -1,21 +1,15 @@
+<?php require 'connect.php'; ?>
 <?php
-require_once('./connect.php');
 
-if (isset($_POST['add'])) {
 
-	$name =  $_POST['name'];
-	$price =  $_POST['price'];
-	$images = $_FILES['file']['name'];
-	$linkup = 'Images/';
-	move_uploaded_file($_FILES['file']['tmp_name'], $linkup . $images);
-	$details =  $_POST['details'];
-	$status =  $_POST['status'];
+$flag = $_SESSION['ss-admin'];
 
-	$insert = "INSERT INTO products(name, price, details, status, images)
-	VALUES ('$name', '$price', '$details', '$status', '$images')";
-	$conn->exec($insert);
-	header("Location: products.php");
+if (!$flag) {
+	header("Location: login.php");
 }
+
+$sql = "select * from products ";
+$result = $conn->query($sql);
 
 ?>
 
@@ -23,18 +17,19 @@ if (isset($_POST['add'])) {
 <html lang="en">
 
 <head>
-	<title>Thêm sản phẩm</title>
+	<title>Trang Chủ</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="Css/style.css"> -->
+	<!-- Favicon Icon -->
+	<link rel="icon" type="image/png" href="images/fav.png">
+	<!-- Stylesheets -->
 	<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 	<link href='vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
 	<link href="css/night-mode.css" rel="stylesheet">
-	<link href="css/step-wizard.css" rel="stylesheet">
 
 	<!-- Vendor Stylesheets -->
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -174,6 +169,7 @@ if (isset($_POST['add'])) {
 		}
 	</style>
 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
@@ -182,13 +178,13 @@ if (isset($_POST['add'])) {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="products.php">
+					<a class="nav-link" href="index.php">
 						<i class="fa fa-home"></i>Trang chủ
 						<span class="sr-only">(current)</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="add-product.php">
+					<a class="nav-link" href="index.php">
 						<i class="fa fa-hand-o-up"></i>
 						</i> Tạo Sản phẩm
 					</a>
@@ -205,41 +201,56 @@ if (isset($_POST['add'])) {
 
 		</div>
 	</nav>
-	<div class="container">
-		<h1 class="py-5 text-center">THÊM SẢN PHẨM</h1>
-		<div class="row justify-content-center">
-			<div class="col-6">
-				<div class="">
-					<form action="" method="post" enctype="multipart/form-data">
 
-						<div class="form-group">
-							<label for="">Tên Sản phẩm</label>
-							<input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Giá của sản phẩm</label>
-							<input type="text" name="price" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Hình Ảnh</label>
-							<input type="file" name="file" id="" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Chi tiết</label>
-							<input type="text" name="details" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
-						<div class="form-group">
-							<label for="">Tình Trạng</label>
-							<input type="text" name="status" id="" class="form-control" placeholder="" aria-describedby="helpId">
-						</div>
 
-						<button class="btn btn-warning btn-block" name="add">Thêm</button>
-					</form>
+
+	<section class="">
+		<div class="container ">
+			<div class="main-title-tt">
+				<div class="main-title-left py-2">
+					<span>For You</span>
+					<h2>Top Featured Products</h2>
 				</div>
 			</div>
-		</div>
-	</div>
+			<div class="row flex-wrap justify-content-md-center mb-3 ">
+				<?php
+				$dem = 0;
+				while ($rs = $result->fetch()) {
+					$dem++;
 
+				?>
+					<div class="col-md-3 py-3 mr-5">
+						<div class="card" style="width: 19rem;">
+							<div style="width:18rem ; height:250px">
+								<img src="images/<?php echo $rs['images'] ?>" class="card-img-top" alt="..." style=" width:99%; height:100%">
+							</div>
+							<div class="card-body">
+								<h5 class="card-title"><?php echo $rs['name'] ?></h5>
+
+								<p class="card-text"><?php echo $rs['price'] ?></p>
+								<p><?php echo $rs['details'] ?></p>
+								<p><?php echo $rs['status'] ?></p>
+								<!-- <a href="mua.php" class="btn btn-primary"> <i class="fa fa-shopping-cart"></i>Mua Ngay</a> -->
+								<!-- <a href="chitiet.php" class="btn btn-danger"><i class="fa fa-street-view"></i> Xem chi tiết</a> -->
+							</div>
+						</div>
+					</div>
+
+				<?php } ?>
+			</div>
+			<!-- php -->
+
+		</div>
+	</section>
+
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

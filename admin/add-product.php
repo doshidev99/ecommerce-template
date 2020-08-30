@@ -1,6 +1,11 @@
 <?php
-require_once('./connect.php');
+require_once('../connect.php');
 
+$flag = $_SESSION['ss-admin'];
+
+if (!$flag) {
+	header("Location: login.php");
+}
 if (isset($_POST['add'])) {
 
 	$name =  $_POST['name'];
@@ -10,11 +15,12 @@ if (isset($_POST['add'])) {
 	move_uploaded_file($_FILES['file']['tmp_name'], $linkup . $images);
 	$details =  $_POST['details'];
 	$status =  $_POST['status'];
+	$category =  $_POST['category'];
 
-	$insert = "INSERT INTO products(name, price, details, status, images)
-	VALUES ('$name', '$price', '$details', '$status', '$images')";
+	$insert = "INSERT INTO products(name, price, details, status, images, category)
+	VALUES ('$name', '$price', '$details', '$status', '$images', '$category')";
 	$conn->exec($insert);
-	header("Location: products.php");
+	header("Location: index.php");
 }
 
 ?>
@@ -182,11 +188,12 @@ if (isset($_POST['add'])) {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="products.php">
+					<a class="nav-link" href="index.php">
 						<i class="fa fa-home"></i>Trang chủ
 						<span class="sr-only">(current)</span>
 					</a>
 				</li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="add-product.php">
 						<i class="fa fa-hand-o-up"></i>
@@ -195,6 +202,7 @@ if (isset($_POST['add'])) {
 				</li>
 
 			</ul>
+
 
 			<ul class="navbar-nav ">
 
@@ -205,7 +213,8 @@ if (isset($_POST['add'])) {
 
 		</div>
 	</nav>
-	<div class="container">
+
+	<div class="container py-5">
 		<h1 class="py-5 text-center">THÊM SẢN PHẨM</h1>
 		<div class="row justify-content-center">
 			<div class="col-6">
@@ -233,12 +242,22 @@ if (isset($_POST['add'])) {
 							<input type="text" name="status" id="" class="form-control" placeholder="" aria-describedby="helpId">
 						</div>
 
+						<div class="form-group">
+							<label for="category">Loại sản phẩm</label>
+							<select name="category" id="">
+								<option value="rau">Rau củ</option>
+								<option value="thucpham">Thực phẩm</option>
+								<option value="traicay">Trái Cây</option>
+							</select>
+						</div>
+
 						<button class="btn btn-warning btn-block" name="add">Thêm</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 </body>
 
